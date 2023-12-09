@@ -14,7 +14,7 @@ client = bigquery.Client(credentials=credentials)
 
 #perform query
 #st.cache data only reruns when query changes or after 10 mins
-#@st.cache_data(ttl=660)
+@st.cache_data(ttl=660)
 def run_query(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
@@ -52,7 +52,7 @@ def yearData(x):
     plt.xticks(np.arange(min(rows_dict.keys()), max(rows_dict.keys())+1))
     #change labels based on value
     ax.set_xlabel("Years")
-    match x:
+    match value:
         case 'amount_sold':
             ax.set_title("Amount Sold Per Year")
             ax.set_ylabel("Total Amount")
